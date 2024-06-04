@@ -52,7 +52,7 @@ def form_login():
     if logado:
         return redirect("/dashboard")
 
-    return render_template("index.html", err="")
+    return render_template("404.html", err="")
 
 @app.route("/dashboard", methods=["GET"])
 def dashboard():
@@ -76,11 +76,11 @@ def fazer_login():
         resposta.set_cookie("senha", senha, httponly=True, samesite="Strict")
         return resposta
     else:
-        return render_template("index.html", err="Usuário ou senha inválidos"), 302
+        return render_template("404.html", err="Usuário ou senha inválidos"), 302
 
 @app.route("/logout", methods=["POST"])
 def logout():
-    resposta = make_response(render_template("index.html"))
+    resposta = make_response(render_template("404.html"))
     resposta.set_cookie("login", "", expires=0)
     resposta.set_cookie("senha", "", expires=0)
     return resposta
