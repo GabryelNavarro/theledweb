@@ -1,0 +1,362 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-image: url(img/Original.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    
+    
+    
+}
+
+form{
+    border: 1px solid rgba(255, 255, 255, 0.44);
+    border-radius: 50px;
+    position: relative;
+    left: 40.5%;
+    width: 300px;
+    height: 306px;
+    top: 220px;
+    background-color: rgba(0, 0, 0, 0.263);
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.347);
+    
+}
+
+h1{
+    color: rgba(255, 255, 255, 0.833);
+    position: relative;
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: lighter;
+    text-transform: uppercase;
+    font-size: 25px;
+    text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.427);
+    bottom: 60px;
+
+}
+h3{
+    color: red;
+    text-align: center;
+    position: relative;
+    bottom: -5px;
+    font-weight: lighter;
+    font-size: 12pt;
+
+}
+
+#campo_login{
+    background-color: rgba(7, 7, 7, 0.341);
+    height: 30px;
+    width: 180px;
+    position: relative;
+    left: 0%;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.148);
+    bottom: 60px;
+    
+    
+}
+
+#campo_login{
+    padding-left: 35px;
+}
+
+
+
+
+    input::placeholder {
+        color: rgba(255, 255, 255, 0.373);
+        
+    
+}
+
+  
+    
+    
+
+
+
+#campo_senha{
+    background-color: rgba(7, 7, 7, 0.341);
+    height: 30px;
+    width: 180px;
+    position: relative;
+    left: 2%;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.148);
+    bottom:44px;
+}
+
+#campo_senha{
+    padding-left: 34px;
+}
+img{
+    width: 280px;
+    position: relative;
+    left: 14px;
+    bottom: 14px;
+    opacity: 90%;
+    
+    
+}
+.olho:hover{
+   
+    cursor: pointer;
+}
+
+.olho {
+    top: 53.3%;
+    left: 72.5%;
+    width: 26px;
+    opacity: 50%;
+        
+    position: absolute;
+}
+
+.olho_div{
+    z-index: 1;
+}
+
+.entrar{
+    background-color: rgba(4, 4, 4, 0.396);
+    position: relative;
+    left: 39%;
+    width: 80px;
+    bottom: 5px;
+    height: 30px;
+    color: rgba(255, 255, 255, 0.401);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    
+    text-transform: uppercase;
+    text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.084);
+    border: none;
+    letter-spacing: 2px;
+    transition: 2s;
+        
+    
+}
+
+.entrar:focus{
+    cursor: progress;
+}
+
+
+.entrar:hover{
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.141);
+    transition: 0.8s;
+    background-color: rgba(0, 0, 0, 0.511);
+    color: rgb(255, 255, 255);
+    text-shadow: 0px    0px 4px black;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+   
+
+
+}
+
+
+    
+
+
+#perfil{
+    width: 35px;
+    left: 38px;
+    position: relative;
+    bottom: 46px;
+}
+#senha_img{
+    width: 33px;
+    position: relative;
+    left: 42px;
+    bottom: 31px;
+}
+
+.preloader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000000; /* Cor de fundo do preloader */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeOut 4S ease-in-out forwards; /* Adiciona a animação de fadeOut */
+}
+ 
+ @keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}   
+
+.porcent {
+    LEFT: 48.9%;
+    font-weight: bolder;
+    color: white;
+    POSITION: FIXED;
+    TOP: 53%;
+    FONT-FAMILY: VERDANA;
+    FONT-SIZE: 8PT;
+    LETTER-SPACING: 2PX;
+}
+
+
+
+
+.text_loader {
+    TEXT-TRANSFORM: UPPERCASE;
+    font-size: 26PT;
+    font-family: verdana;
+    color: rgba(255, 255, 255, 0.97);
+    LEFT: 0%;
+    position: relative;
+    LETTER-SPACING: 9PX;
+    BOTTOM: 4.5%;
+}
+
+.run {
+    LEFT: 41%;
+    POSITION: FIXED;
+    TOP: 43.9%;
+    width: 56px;
+    FILTER: grayscale(100%);
+    animation: cor 8S forwards;
+}
+    @keyframes cor {
+        0% {
+          filter: grayscale(100%);
+        }
+        100% {
+          filter: grayscale(0%);
+        }
+      }
+      
+    
+
+      .strong {
+        PADDING-LEFT: 4%;
+        LEFT: 20%;
+        font-size: 25pt;
+        word-spacing: 25px;
+    }
+
+    .text_loader {
+        TEXT-TRANSFORM: UPPERCASE;
+        font-size: 26PT;
+        font-family: verdana;
+        color: rgba(255, 255, 255, 0.97);
+        LEFT: 45.2%;
+        position: FIXED;
+        LETTER-SPACING: 6PX;
+        BOTTOM: 51.4%;
+    }
+    
+
+    .text_loader_c {
+        position: fixed;
+        color: white;
+        padding-bottom: 0%;
+        text-align: center;
+        font-family: monospace;
+        font-weight: lighter;
+        text-transform: uppercase;
+        left: 43%;
+        font-size: 8pt;
+        letter-spacing: 3px;
+    }
+
+
+    
+/* Adicionadas regras de mídia para ajustar o layout em telas menores */
+@media only screen and (max-width: 768px) {
+    body {
+        overflow-x: hidden; /* Impede a rolagem horizontal */
+       
+    }
+    
+    form {
+        width: 75%; /* Reduz a largura do formulário em telas menores */
+        left: 12%; /* Centraliza o formulário */
+        position: center;
+    }
+    
+    input[type="submit"] {
+        width: 30%; /* Faz com que o botão de enviar ocupe toda a largura do formulário */
+        margin-bottom: 20px; /* Adiciona um espaço entre o botão e os campos de entrada */
+    }
+}
+
+
+
+
+/* Adicionada uma regra para ajustar o tamanho da imagem de perfil em telas menores */
+@media only screen and (max-width: 480px) {
+    #perfil {
+        width: 35px;
+    }
+
+
+
+body {
+    overflow-x: hidden; /* Impede a rolagem horizontal */
+}
+
+.preloader {
+    /* Adicione as regras de mídia desejadas para o preloader */
+    width: 100%; /* Torna o preloader ocupar toda a largura da tela */
+    height: 100%; /* Torna o preloader ocupar toda a altura da tela */
+   
+}
+
+.porcent {
+    /* Ajuste as propriedades de posicionamento do texto da porcentagem */
+    right: 50%;
+    top: 40%;
+    transform: translate(-5%, -5%);
+    font-size: 8pt;
+}
+
+.text_loader {
+    /* Ajuste as propriedades de posicionamento do texto do loader */
+    left: 55%;
+    bottom: 64.5%;
+    transform: translateX(-50%);
+    font-size: 23pt;
+}
+
+.run {
+    /* Ajuste as propriedades de posicionamento da animação */
+    left: 25%;
+    top: 31%;
+    transform: translateX(-50%);
+    width: 45px;
+  
+}
+
+.strong{
+    font-size: 23PT;
+}
+
+.text_loader_c{
+    font-size: 8px;
+    bottom: 62%;
+    left: 25%;
+}
+
+
+   
+
+
+}

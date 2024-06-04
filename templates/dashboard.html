@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashbord</title>
+    <script src="../static/sair.js" ></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'estilos_dash_adm.css') }}" />
+    <link rel="stylesheet" href="../static/estilos_dash_adm.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="../static/pagina_adm.js" ></script>
+
+</head>
+
+
+<body>
+    <header>
+        <div class="the_led">
+           
+            
+
+        </div>
+       
+
+    </header>
+    <div>
+        
+        <nav>
+                <ul>
+        
+        
+                <a href="#home">
+                <li><i class="bi bi-house"></i><span >Home
+                </span></li>
+                </a>
+                <a href="#dassh">
+                    <li><i class="bi bi-columns-gap"></i><span></span>Dashbord</li>
+                </a>
+                <a href="">
+                    <li><i class="bi bi-people"></i><span></span>usuários
+                    </li>
+                </a>
+                <a href="">
+                    <li><i class="bi bi-person-circle"></i><span></span>perfil</li>
+                </a>
+                <a href="">
+                    <li><i class="bi bi-gear"></i><span></span>configurações
+                    </li>aaaa
+                </a>
+              
+            </ul>
+            <script src="../static/pagina_adm.js"></script>
+    </div>
+    </nav>
+    
+
+    <main>
+        <div class="form_sair">
+            <form action="/logout" method="post" id="logoutForm">
+             
+                 <button class="button" type="submit">logoutsss </button>
+             
+                </form>
+        </div>
+        
+        
+    </main>
+    <footer>
+        
+
+
+    </footer>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'estilos.css') }}" />
+    <link rel="shortcut icon" href="static/img/THELED.jpeg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ladda@2.0.1/dist/ladda.min.css">
+
+    
+    <title>Conecte-se</title>
+</head>
+<script src="static/preloader.js"></script>
+<div class="preloader">
+    <div class="porcent">0%</div>
+    <div><img src="../static/img/img-theled.png" alt="" draggable="false" class="run"></div>
+    <div class="text_loader">The<strong class="strong">Led</strong></div>
+    <div class="text_loader_c" >infinitas Possibilidades</div>
+
+</div>
+<body>
+
+    <script src="static/main.js"></script>
+
+    <header>
+
+    </header>
+    <nav> 
+
+    </nav>
+    
+    <main>
+    
+        <form action="/login" method="post">
+            
+         <img src="static/img/images__1_-removebg-preview.png" alt="theledlogo" class="logo" draggable="false" ></h5>
+        
+            
+            
+            
+            <div class="login">
+                    <label for="campo_login" class="login"></label>
+                    <img src="static/img/perfil.png" alt="perfil" id="perfil">
+                    <input type="text" name="login" id="campo_login" placeholder="nome de usuario" autocomplete="on" >
+                
+                    <script src="main.js"></script>
+                    <div>
+                        <label for="campo_senha" ></label>
+                        <img src="static/img/senha.png" alt="senha" id="senha_img" >
+                        <input type="password" placeholder="senha" id="campo_senha" name="senha">
+                        <img src="static/img/visivel.png"alt=""  id="olho" class="olho" onclick="view()" draggable="false">
+
+                        
+                        
+                
+                    </div>
+                    <input type="submit" value="entrar" class="entrar" >
+                    <h3>{{err}}</h3>
+            </div>
+            
+            
+
+        </form>
+
+    </main>
+    <footer>
+        
+       
+
+    </footer>
+    
+    
+</body>
+</html>
