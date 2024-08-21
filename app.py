@@ -3,6 +3,7 @@ import pyodbc
 import hashlib
 import binascii
 import os
+import subprocess
 
 app = Flask(__name__)
 
@@ -52,7 +53,7 @@ def form_login():
     if logado:
         return redirect("/dashboard")
 
-    return render_template("404.html", err="")
+    return render_template("index.html", err="")
 
 @app.route("/dashboard", methods=["GET"])
 def dashboard():
@@ -76,13 +77,13 @@ def fazer_login():
         resposta.set_cookie("senha", senha, httponly=True, samesite="Strict")
         return resposta
     else:
-        return render_template("404.html", err="Usuário ou senha inválidos"), 302
+        return render_template("index.html", err="Usuário ou senha inválidos"), 302
 
 @app.route("/logout", methods=["POST"])
 def logout():
-    resposta = make_response(render_template("404.html"))
+    resposta = make_response(render_template("index.html"))
     resposta.set_cookie("login", "", expires=0)
     resposta.set_cookie("senha", "", expires=0)
     return resposta
 
-app.run(host='localhost', debug=True)
+app.run(host='localhost', debug=True, port=9080)
