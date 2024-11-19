@@ -10,11 +10,13 @@ app = Flask(__name__)
 # Configurações de conexão com o SQL Server
 dados_conexao = {
     "Driver": "SQL Server",
-    "Server": "DESKTOP-UF5M8IT",  # Substitua pelo nome do seu servidor SQL
-    "Database": "Usuarios",  # Substitua pelo nome do seu banco de dados
-    "timeout": 60
+    "Server": "10.1.0.112",  # Substitua pelo nome do servidor SQL
+    "Database": "Cadastro_projeto",  # Substitua pelo nome  banco de dados
+    "timeout": 30,
+    "UID": "admin_cadastro",# --> Usuario BD
+    "PWD": "itel11TH_proTheled@2025" # --> Senha BD
 }
-
+# 10.1.0.112
 # Função para verificar o login no banco de dados
 def verificar_login_banco(nome, senha):
     try:
@@ -23,28 +25,34 @@ def verificar_login_banco(nome, senha):
         cursor = conexao.cursor()
 
         # Consultar o banco de dados para verificar se as credenciais existem
-        cursor.execute("SELECT * FROM Usuario WHERE nome_usuario = ? AND senha_hash = ?", (nome,senha))
+        cursor.execute("SELECT COUNT(1) FROM Adm WHERE usuario=? AND senha_usuario=?", (nome, senha))
         usuario = cursor.fetchone()
 
         # Fechar a conexão
         conexao.close()
 
-        if usuario:
-            # Verificar se o usuário foi encontrado no banco de dados
-            return usuario
+        if usuario and usuario[0] > 0:  # Verifica se encontrou o usuário
+            return True
         else:
-            return None
+            return False
 
     except Exception as e:
         print(f"Erro ao verificar login no banco de dados: {str(e)}")
-        return None
+        return False
 
 
 # Função para autenticar o login
 def autenticar_login():
     login = request.cookies.get("login", "")
     senha = request.cookies.get("senha", "")
-    return verificar_login_banco(login, senha)
+
+    if login and senha:
+        # Verifica no banco de dados se o login e a senha são válidos
+        return verificar_login_banco(login, senha)
+    return False
+
+@app.route("/")
+@app.route("/login", methods=["GET"])
 
 @app.route("/")
 @app.route("/login", methods=["GET"])
@@ -86,4 +94,4 @@ def logout():
     resposta.set_cookie("senha", "", expires=0)
     return resposta
 
-app.run(host='localhost', debug=True, port=9080)
+app.run(host='0.0.0.0', debug=True, port=9080)

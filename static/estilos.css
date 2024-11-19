@@ -113,12 +113,12 @@ img{
 }
 
 .olho {
-    top: 53.3%;
-    left: 72.5%;
+    bottom: 36px;
+    left: -40px;
     width: 26px;
     opacity: 50%;
         
-    position: absolute;
+    position: relative;
 }
 
 .olho_div{
