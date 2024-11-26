@@ -1,73 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashbord</title>
-    <script src="../static/sair.js" ></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'estilos_dash_adm.css') }}" />
-    <link rel="stylesheet" href="../static/estilos_dash_adm.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="../static/pagina_adm.js" ></script>
-
+    <link rel="stylesheet" href="/static/estilos_dash_adm.css">
+    <script src="/static/pagina_adm.js"></script>
+    <title>Document</title>
 </head>
-
-
 <body>
-    <header>
-        <div class="the_led">
-           
-            
-
-        </div>
-       
-
-    </header>
-    <div>
-        
-        <nav>
-                <ul>
-        
-        
-                <a href="#home">
-                <li><i class="bi bi-house"></i><span >Home
-                </span></li>
-                </a>
-                <a href="#dassh">
-                    <li><i class="bi bi-columns-gap"></i><span></span>Dashbord</li>
-                </a>
-                <a href="">
-                    <li><i class="bi bi-people"></i><span></span>usuários
-                    </li>
-                </a>
-                <a href="">
-                    <li><i class="bi bi-person-circle"></i><span></span>perfil</li>
-                </a>
-                <a href="">
-                    <li><i class="bi bi-gear"></i><span></span>configurações
-                    </li>aaaa
-                </a>
-              
-            </ul>
-            <script src="../static/pagina_adm.js"></script>
-    </div>
-    </nav>
+    <div class="botao_menu"><button class="toglle-btn" onclick="mostrardiv()">☰</button></div>
+    <div class="menu_lateral" id="menu_lateral">
     
+   
+   
+    <nav>
+        
+        
+            <ul>
+                <li>
+                    <span><a href="#home"><img src="/static/img/dash_adm/home.png"alt="" class="img_home_dash"><i class="homemenu">Home</i></a></span>
+                    
+                </li>
+                <li>
+                    <span><a href="#dashboard"><img src="/static/img/dash_adm/dashboard.png"alt="" class="img_dash"><i class="dashmenu">Dashboard</i></a></span>
+                </li>
+                <li onclick="submenu('submenu_usuario')">
+                    <span><a href="#usuarios"><img src="/static/img/dash_adm/colaboradores.png" alt="" class="img_colaborador"><i>Colaboradores</i></a></span>
+                    <ul id="usuarios_submenu" class="submenu">
+                        <li>
+                            <a href="#cadastro_colaborador">cadastrar colaborador</a>
+                        </li>
+                        <li>
+                            <a href="#visualizarcolaborador">Colaboradres no Sistema</a>
+                        </li>
 
-    <main>
-        <div class="form_sair">
-            <form action="/logout" method="post" id="logoutForm">
-             
-                 <button class="button" type="submit">logoutsss </button>
-             
-                </form>
+                    </ul>
+                    <li onclick="submenu_produtos('submenu_produtos')">
+                        <span><a href="#produtos"> <img src="/static/img/dash_adm/produto-digital.png" alt="" class="img_dash_produtos"><i>Produtos</i></a></span>
+                        <ul class="submenu_produtos" id="sub-produtos">
+                            <li>
+                                <a href="#cadastrar_produto">Cadastrar Produto</a>
+                                <li>
+                                    <a href="#produto_sistema">Produtos no Sistema</a>
+                                </li>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                </li>
+                <li>
+                    <span><a href="#configuracao"> <img src="/static/img/dash_adm/configuracoes.png" alt="" class="img_dash_config"><i>Configurações</i></a></span>
+                </li>
+                
+            </ul>
+            <button class="logout-btn" onclick="window.location.href='/logout';">Sair</button>
         </div>
-        
-        
-    </main>
-    <footer>
-        
+    </nav>
 
+    <article>
+        <h1></h1>
+    </article>
+    <footer>
 
     </footer>
 </body>

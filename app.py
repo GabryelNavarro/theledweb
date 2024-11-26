@@ -51,6 +51,8 @@ def autenticar_login():
         return verificar_login_banco(login, senha)
     return False
 
+
+
 @app.route("/")
 @app.route("/login", methods=["GET"])
 
@@ -87,9 +89,9 @@ def fazer_login():
     else:
         return render_template("index.html", err="Usuário ou senha inválidos"), 302
 
-@app.route("/logout", methods=["POST"])
+@app.route("/logout", methods=["GET"])
 def logout():
-    resposta = make_response(render_template("index.html"))
+    resposta = make_response(redirect("login"))
     resposta.set_cookie("login", "", expires=0)
     resposta.set_cookie("senha", "", expires=0)
     return resposta

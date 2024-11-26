@@ -1,93 +1,197 @@
-
 *{
-    margin: 0;
     padding: 0;
-    
-}
-
-body{background-color: rgb(18, 18, 18);}
-
-
-i{
-    color: rgb(255, 255, 255);
-    font-size: 20pt;
-    z-index: 999;
-    transition:  0.4s;
-    position: fixed;
-    font-size: 14pt;
- 
-
-
-}
-i:hover{
-    font-size: 21pt;
-}
-
-
-
-span{
-    padding-left: 50px;}
-
-
-ul{background-color: aliceblu;
-height: 100%;
-width: 80%;
-padding-left: 9%;
-}
-
-nav{position: fixed;
-height: 100%;
-width: 250px;
-background-color: rgba(24, 24, 24, 0.377);
-border-right: 5px solid rgba(0, 0, 0, 0);
-box-shadow: 0px 0px 24px rgba(255, 255, 255, 0.111);
-}
-
-a:hover{
-    
-    color: rgb(252, 252, 252);
-    transition: 1s;
-    filter: opacity(100%);
-    filter: brightness(100);
-    
-    
-    
-   
-    text-shadow: 8px 3px 3px rgba(0, 0, 0, 0.818);
-
-    
-
-}
-
-a{
-    color: white;
+    margin: 0;
+    color:white;
     text-decoration: none;
-    top: 20%;
+    font-style: normal;
     list-style: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: lighter;
-    text-transform: uppercase;
-    filter: opacity(60%);
-    transition: 0.5s;
     font-size: 10pt;
-    
-    
+    text-transform: uppercase;
+
 }
-
-li{
-    padding-top: 20%;
-}
-
-.button{
-    z-index: 999;
-    position: fixed;
-    top: 50%;
-    left: 5%;
-    
-}
-
-
-
 body{
-    background-image: linear-gradient(to left);
+    background-image: linear-gradient(18deg,#445479,rgb(102, 97, 97));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
 }
+
+
+
+/* MENU LATERAL EXIBIDO*/
+.menu_lateral{
+    background-image: linear-gradient(to bottom, #363746,rgba(0, 58, 165, 0.555));
+    background-attachment: fixed;
+    position: fixed;
+    width: 60px;    
+    border: 1px solid rgb(82, 80, 80);
+    border-radius: 1PX;
+    height: 100%;
+    z-index: -10;
+    padding-top: 5%;
+    padding-left: 1%;
+    transition: 0.5s;
+    box-shadow: 10px 10px 10px #3f4552;
+    
+
+    
+   
+}
+
+
+
+.menu_lateral i .homemenu{
+    display: none;
+  
+    
+    
+
+   
+
+    
+}
+/* MENU LATERAL QUANDO ELE ABRE */
+.menu_lateral.fecharmenu{
+    
+    width: 250px;
+    transition: 0.5s linear;
+    
+   
+    
+    
+}
+
+.menu_lateral.fecharmenu i{
+    
+    display: inline-block;
+    vertical-align: middle ;
+    
+   
+    
+    
+}
+.menu_lateral i {
+    display: none;
+}
+
+
+/* ----------------------------------------------------- */
+
+
+
+
+/* SUB MENU DO MENU LATERAL */
+.submenu{
+    display: none;
+}
+/* ------------------------------------------------------ */
+
+/* CONFIGURAÇÃO IMG HOME MENU LATERAL */
+.img_home_dash{
+    width: 35px;
+    padding-right: 20px;
+    transition: 0.5s;
+    vertical-align: middle;
+   
+
+   
+    
+}
+.img_home_dash:hover{
+    transform: scale(1.4);
+    transition: 0.2s;
+    
+}
+/* ------------------------------------- */
+
+.img_dash{
+    width: 35px;
+    padding-right: 20px;
+    transition: 0.5s;
+    vertical-align: middle;
+   
+
+}
+
+.img_dash:hover{
+    transform: scale(1.4);
+    transition: 0.2s;
+    
+
+}
+.img_colaborador{
+    width: 35px;
+    padding-right: 20px;
+    transition: 0.5s;
+    vertical-align: middle;
+   
+
+}
+
+.img_colaborador:hover{
+    transform: scale(1.4);
+    transition: 0.2s;
+    
+}
+
+.img_dash_produtos{
+    width: 35px;
+    padding-right: 20px;
+    transition: 0.5s;
+    vertical-align: middle
+}
+
+.img_dash_produtos:hover{
+    transform: scale(1.4);
+    transition: 0.2s;
+    
+}
+
+.img_dash_config{
+    width: 35px;
+    padding-right: 20px;
+    transition: 0.5s;
+    vertical-align: middle
+}
+.img_dash_config:hover{
+    transform: scale(1.4);
+    transition: 0.2s;
+    
+}
+
+
+
+/* BOTAO MENU */
+.toglle-btn{
+
+margin-left: 1%;
+position: fixed;
+width: 45px;
+height: 45px;
+font-size: 20pt;
+margin-top: 20px;
+background-image: linear-gradient(to bottom, #274889,#353A50);
+border: 1px solid rgb(51, 49, 49);
+border-radius: 5px;
+transition: 0.4s linear;
+}
+
+.toglle-btn:hover{
+    box-shadow: 10px 10px 10px rgb(26, 25, 25);
+    transform: scale(1.1);
+    transition: 0.2s linear;
+}
+
+
+li i:hover{
+text-decoration: underline;
+transition: 2s linear;
+
+   
+}
+.submenu_produtos{
+    display: none;
+}
+
+
