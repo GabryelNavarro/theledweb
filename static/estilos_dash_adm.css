@@ -243,17 +243,17 @@ transition: 0.2s linear;
     display: none;
 }
 
-.logout-btn {
+/* .logout-btn {
 position: relative;
-top: 400px;
-padding-left: 8PX;
+top: 60px;
+padding-left: 2%;
 background-color: transparent;
 height: 40px;
 width: 40px;
 border: none;
 border-radius: 5px;
 cursor: pointer;
-}
+} */
 .img_logout{
     width: 40px;
     height: 40px;
@@ -292,4 +292,12 @@ i{
 }
 /* ---------------------------------- */
 
+.logout:hover{
+    
+    background-color: rgb(36, 35, 35);
 
+}
+
+.logout{
+    margin-top: 50px;
+}
