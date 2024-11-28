@@ -1,17 +1,18 @@
 *{
     padding: 0;
     margin: 0;
-    color:white;
+    color:rgb(255, 255, 255);
     text-decoration: none;
     font-style: normal;
     list-style: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 10pt;
     text-transform: uppercase;
+    letter-spacing: 3px;
 
 }
 body{
-    background-image: linear-gradient(18deg,#445479,rgb(102, 97, 97));
+    background-image: linear-gradient(180deg,#4d4b4b,#111111fa);
     background-repeat: no-repeat;
     background-attachment: fixed;
     position: relative;
@@ -21,26 +22,37 @@ body{
 
 /* MENU LATERAL EXIBIDO*/
 .menu_lateral{
-    background-image: linear-gradient(to bottom, #363746,rgba(0, 58, 165, 0.555));
-    background-attachment: fixed;
+    background-image: url('img/dash_adm/fundopreto.jpg');
+    background-attachment:  scroll;
+    background-repeat: no-repeat;
+   background-size: 70px 70px;
+    background-color: black;
+    background-position: center 550px;
+    
+    
+
+
     position: fixed;
     width: 60px;    
-    border: 1px solid rgb(82, 80, 80);
+    border-right:3.5px solid ;
+    border-image: linear-gradient(to bottom,#E5BD40, #EE5E54, #BC669B, #5C55A0) 1;
+    box-shadow: 6px 6px 6px #414141bd;
     border-radius: 1PX;
     height: 100%;
     z-index: -10;
     padding-top: 5%;
-    padding-left: 1%;
+    padding-left: 0.5%;
     transition: 0.5s;
-    box-shadow: 10px 10px 10px #3f4552;
+    
     
 
     
    
 }
+/* -------------------------------------------------------------------------------- */
 
 
-
+/* 
 .menu_lateral i .homemenu{
     display: none;
   
@@ -50,17 +62,20 @@ body{
    
 
     
-}
+} */
 /* MENU LATERAL QUANDO ELE ABRE */
 .menu_lateral.fecharmenu{
     
     width: 250px;
     transition: 0.5s linear;
-    
-   
-    
-    
+    white-space: nowrap;
+    background-size: 150px 150px;
+    box-shadow: 10px 10px 6px #1b1b1be1;
+    transform: translate(1.2);
 }
+
+
+
 
 .menu_lateral.fecharmenu i{
     
@@ -75,8 +90,9 @@ body{
     display: none;
 }
 
-
 /* ----------------------------------------------------- */
+
+
 
 
 
@@ -88,9 +104,42 @@ body{
 /* ------------------------------------------------------ */
 
 /* CONFIGURAÇÃO IMG HOME MENU LATERAL */
-.img_home_dash{
-    width: 35px;
-    padding-right: 20px;
+
+.img_menulateral{
+    vertical-align: middle;
+    width: 30px;
+    transition: 0.3s;
+    padding: 8px;
+    
+
+}
+
+.img_menulateral:hover{
+    transform: scale(1.5);
+   
+}
+
+/* ANIMAÇÃO LI */
+li:hover{
+    background-color: rgb(36, 35, 35);
+    border-radius: 4px;
+    transition: 0.5s;
+    
+}
+
+li:hover i{
+    color: #DC35A9;
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+   
+  
+}
+
+
+/* ---------------------------------------- */
+
+/* .img_home_dash{
+    width: 30px;
+    padding-right: 30px;
     transition: 0.5s;
     vertical-align: middle;
    
@@ -102,19 +151,19 @@ body{
     transform: scale(1.4);
     transition: 0.2s;
     
-}
+} */
 /* ------------------------------------- */
 
-.img_dash{
-    width: 35px;
-    padding-right: 20px;
+/* .img_dash{
+    width: 30px;
+    padding-right: 30px;
     transition: 0.5s;
     vertical-align: middle;
    
 
-}
+} */
 
-.img_dash:hover{
+/* .img_dash:hover{
     transform: scale(1.4);
     transition: 0.2s;
     
@@ -158,7 +207,7 @@ body{
     transform: scale(1.4);
     transition: 0.2s;
     
-}
+} */
 
 
 
@@ -171,27 +220,76 @@ width: 45px;
 height: 45px;
 font-size: 20pt;
 margin-top: 20px;
-background-image: linear-gradient(to bottom, #274889,#353A50);
-border: 1px solid rgb(51, 49, 49);
+background-color: transparent;
+border: none;
 border-radius: 5px;
 transition: 0.4s linear;
+border: 1px solid black;
 }
 
 .toglle-btn:hover{
-    box-shadow: 10px 10px 10px rgb(26, 25, 25);
-    transform: scale(1.1);
-    transition: 0.2s linear;
+    cursor: pointer;
 }
-
+/* ---------------------------- */
 
 li i:hover{
-text-decoration: underline;
-transition: 2s linear;
+/* color: #5C55A0; */
+transition: 0.2s linear;
+
 
    
 }
 .submenu_produtos{
     display: none;
 }
+
+.logout-btn {
+position: relative;
+top: 400px;
+padding-left: 8PX;
+background-color: transparent;
+height: 40px;
+width: 40px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+.img_logout{
+    width: 40px;
+    height: 40px;
+    transition: 0.2s;
+ 
+   
+   
+    
+
+}
+.img_logout:hover{
+    transform: scale(1.2);
+    
+    transition: 0.2s;
+   
+}
+/* ANIMAÇÃO LETRAS MENULATERAL */
+
+@keyframes fadein{
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 100%;
+        transform: translateX(20px);
+    }
+
+
+
+}
+
+
+i{
+    animation: fadein 0.8s forwards ;
+}
+/* ---------------------------------- */
 
 

@@ -8,24 +8,30 @@
     <title>Document</title>
 </head>
 <body>
+    <header>
+        
+    </header>
     <div class="botao_menu"><button class="toglle-btn" onclick="mostrardiv()">☰</button></div>
     <div class="menu_lateral" id="menu_lateral">
-    
+          
    
    
     <nav>
         
         
             <ul>
+                
                 <li>
-                    <span><a href="#home"><img src="/static/img/dash_adm/home.png"alt="" class="img_home_dash"><i class="homemenu">Home</i></a></span>
+                    <span><a href="#home"><img src="/static/img/dash_adm/banco.png"alt="" class="img_menulateral"><i class="homemenu">Home </i></a></span>
                     
                 </li>
+             
                 <li>
-                    <span><a href="#dashboard"><img src="/static/img/dash_adm/dashboard.png"alt="" class="img_dash"><i class="dashmenu">Dashboard</i></a></span>
+                    <span><a href="#dashboard"><img src="/static/img/dash_adm/dashboard.png"alt="" class="img_menulateral"><i class="dashmenu">Dashboard</i></a></span>
                 </li>
+            
                 <li onclick="submenu('submenu_usuario')">
-                    <span><a href="#usuarios"><img src="/static/img/dash_adm/colaboradores.png" alt="" class="img_colaborador"><i>Colaboradores</i></a></span>
+                    <span><a href="#usuarios"><img src="/static/img/dash_adm/colaboradores.png" alt="" class="img_menulateral"><i>Colaboradores</i></a></span>
                     <ul id="usuarios_submenu" class="submenu">
                         <li>
                             <a href="#cadastro_colaborador">cadastrar colaborador</a>
@@ -35,8 +41,11 @@
                         </li>
 
                     </ul>
+                  
                     <li onclick="submenu_produtos('submenu_produtos')">
-                        <span><a href="#produtos"> <img src="/static/img/dash_adm/produto-digital.png" alt="" class="img_dash_produtos"><i>Produtos</i></a></span>
+                        
+                        <span><a href="#produtos"> <img src="/static/img/dash_adm/produto-digital.png" alt="" class="img_menulateral"><i>Produtos</i></a></span>
+                        
                         <ul class="submenu_produtos" id="sub-produtos">
                             <li>
                                 <a href="#cadastrar_produto">Cadastrar Produto</a>
@@ -49,12 +58,13 @@
                     </li>
                 </li>
                 <li>
-                    <span><a href="#configuracao"> <img src="/static/img/dash_adm/configuracoes.png" alt="" class="img_dash_config"><i>Configurações</i></a></span>
+                    <span><a href="#configuracao"> <img src="/static/img/dash_adm/configuracoes.png" alt="" class="img_menulateral"><i>Configurações</i></a></span>
                 </li>
                 
             </ul>
-            <button class="logout-btn" onclick="window.location.href='/logout';">Sair</button>
+            <!-- <div class="div_img-logo"><img src="/static/img/dash_adm/fundopreto.jpg" alt="" class="img_logo"></div> -->
         </div>
+        <button class="logout-btn" onclick="window.location.href='/logout';"><img src="/static/img/dash_adm/logout.png"  class="img_menulateral" title="Sair"></button>
     </nav>
 
     <article>
