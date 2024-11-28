@@ -4,6 +4,8 @@ import hashlib
 import binascii
 import os
 import subprocess
+from functools import wraps
+from flask import Response
 
 app = Flask(__name__)
 
@@ -41,6 +43,22 @@ def verificar_login_banco(nome, senha):
         return False
 
 
+
+def no_cache(view):
+    @wraps(view)
+    def wrapped_view(*args, **kwargs):
+        response = make_response(view(*args, **kwargs))
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
+    return wrapped_view
+
+
+
+
+
+
 # Função para autenticar o login
 def autenticar_login():
     login = request.cookies.get("login", "")
@@ -66,6 +84,7 @@ def form_login():
     return render_template("index.html", err="")
 
 @app.route("/dashboard", methods=["GET"])
+@no_cache
 def dashboard():
     logado = autenticar_login()
     if not logado:
@@ -91,9 +110,12 @@ def fazer_login():
 
 @app.route("/logout", methods=["GET"])
 def logout():
-    resposta = make_response(redirect("login"))
+    resposta = make_response(redirect("/login"))
     resposta.set_cookie("login", "", expires=0)
     resposta.set_cookie("senha", "", expires=0)
+    resposta.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0"
+    resposta.headers["Pragma"] = "no-cache"
+    resposta.headers["Expires"] = "0"
     return resposta
 
 app.run(host='0.0.0.0', debug=True, port=9080)
