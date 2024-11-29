@@ -34,7 +34,7 @@ body{
 
     position: fixed;
     width: 60px;    
-    border-right:3.5px solid ;
+    border-right:2px solid ;
     border-image: linear-gradient(to bottom,#E5BD40, #EE5E54, #BC669B, #5C55A0) 1;
     box-shadow: 6px 6px 6px #414141bd;
     border-radius: 1PX;
@@ -300,4 +300,13 @@ i{
 
 .logout{
     margin-top: 50px;
+}
+
+/* INDENTIFICAÇÃO DE PAGINA ATUAL ATRAVES DO MENU LATERAL */
+.selected {
+    background: linear-gradient(to left, #e5bc40be, #ee5e54ad, #bc669b9c, #5c55a09f);
+    color: white; /* Para garantir que o texto fique legível */
+    border-radius: 1px; /* Opcional: arredonda os cantos */
+    padding: 1px; /* Opcional: adiciona um pouco de espaçamento interno */
+    
 }

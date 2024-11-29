@@ -14,7 +14,7 @@ dados_conexao = {
     "Driver": "SQL Server",
     "Server": "10.1.0.112",  # Substitua pelo nome do servidor SQL
     "Database": "Cadastro_projeto",  # Substitua pelo nome  banco de dados
-    "timeout": 30,
+    "timeout": 60,
     "UID": "admin_cadastro",# --> Usuario BD
     "PWD": "itel11TH_proTheled@2025" # --> Senha BD
 }
