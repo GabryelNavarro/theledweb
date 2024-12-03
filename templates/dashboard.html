@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="/static/estilos_dash_adm.css">
+    <script src="/static/grafico_dash_pg_Inicial.js"></script>
     <script src="/static/pagina_adm.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" href="/static/img/home_login.ico" type="image/x-icon">
     <title>THE LED - GERAL</title>
 </head>
@@ -68,14 +71,34 @@
                 
             </ul>
             <!-- <div class="div_img-logo"><img src="/static/img/dash_adm/fundopreto.jpg" alt="" class="img_logo"></div> -->
+
+          
         </div>
         
     </nav>
 
     <article>
-        <div class="div boasvindas">
+        <div class="div_boasvindas">
+            <p>bem-vindo(A) ao sistema the led,{{nome_completo}}!</p> 
+            <br><br><br><br>
+            <div class="div_grafico_produto">
+               
+                 <div class="graficos_container">
+                    <h1 class="legenda_grafico_produto">produtos no sitema the led</h1>
+                    
+                    <canvas id="grafico_produto" class="grafico-produto"></canvas>
+                    
+                    
+                    <canvas id="grafico-colaborador" class="grafico-colaborador" >
+                        
+                    </canvas>
+                   <h1 class="legenda_grafico_colaborador"> colaboradores no sistema the led </h1>
+                 </div>
+            </div>
+           
             
         </div>
+      
     </article>
     <footer>
 

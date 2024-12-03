@@ -39,7 +39,7 @@ body{
     box-shadow: 6px 6px 6px #414141bd;
     border-radius: 1PX;
     height: 100%;
-    z-index: -10;
+    z-index: 10;
     padding-top: 5%;
     padding-left: 0.5%;
     transition: 0.5s;
@@ -72,6 +72,8 @@ body{
     background-size: 150px 150px;
     box-shadow: 10px 10px 6px #1b1b1be1;
     transform: translate(1.2);
+    z-index: 10;
+
 }
 
 
@@ -225,7 +227,7 @@ color: #dfdddd;
 border-radius: 5px;
 transition: 0.4s linear;
 border: none;
-
+z-index: 11;
 
 }
 
@@ -311,4 +313,58 @@ i{
     border-radius: 1px; /* Opcional: arredonda os cantos */
     padding: 1px; /* Opcional: adiciona um pouco de espaçamento interno */
     
+}
+
+/* BOAS VINDAS */
+.div_boasvindas {
+    position: relative;
+    top: 50px; /* Ajusta a posição vertical */
+    left: 8%;
+    
+   
+    border: 1px solid black;
+    padding: 10px;
+    z-index: 1;
+    width: 87%;
+    
+    /* height: 620px */
+    
+}
+
+.div_boasvindas p{
+    text-align: center;
+}
+
+
+/* GRAFICOS  */
+
+.grafico-produto{
+   max-width: 600px;
+   max-height: 600px;
+   margin-left: 100px;
+   position: relative;
+  margin-top: 2%;
+}
+
+.grafico-colaborador{
+    max-width: 300px;
+    max-height: 300px;
+    left: 70%;
+    position: absolute;
+    top: 23%;
+}
+
+/* LEGENDAS GRAFICOS */
+
+.legenda_grafico_colaborador{
+    left: 67%; 
+    position: absolute;
+    bottom: 85%;
+   
+  
+}
+.legenda_grafico_produto{
+    position: absolute;
+    left: 20%;
+    top: 25%;
 }

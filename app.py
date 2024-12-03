@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, redirect, render_template
+from flask import Flask, request, make_response, redirect, render_template,jsonify
 import pyodbc
 import hashlib
 import binascii
@@ -20,6 +20,8 @@ dados_conexao = {
 }
 # 10.1.0.112
 # Função para verificar o login no banco de dados
+
+
 def verificar_login_banco(nome, senha):
     try:
         # Conectar ao banco de dados
@@ -83,14 +85,90 @@ def form_login():
 
     return render_template("index.html", err="")
 
+
+def buscar_nome_completo(login):
+    try:
+        # CONEXÃO BANCO DE DADOS
+        conexao = pyodbc.connect(**dados_conexao)
+        cursor = conexao.cursor()
+
+        # CONSULTA SQL PARA BUSCAR NOME COMPLETO DE ACORDO COM LOGIN(usuario.dbo)
+        cursor.execute("SELECT nome_completo from Adm WHERE usuario=?", (login))
+        usuario = cursor.fetchone() #Busca uma única linha
+
+        #fechar conexão
+        conexao.close()
+        
+        if usuario: # SE ENCONTROU O USUARIO, RETORNA O NOME COMPLETO
+            return usuario[0] #Retorna o 'campo nome_completo'
+        else:
+            return None # CASO NÃO ENCONTRE, RETORNA NONE
+    except Exception as e:
+        print(f"Erro ao buscar nome completo no banco de dados: {str(e)}")
+        return None
+
+
 @app.route("/dashboard", methods=["GET"])
 @no_cache
 def dashboard():
     logado = autenticar_login()
     if not logado:
         return redirect("/login")
+    
+    # Obtém o login do cookie
+    login = request.cookies.get("login", "")
 
-    return render_template("dashboard.html", user=logado)
+    # Busca o nome completo associado ao login
+    nome_completo = buscar_nome_completo(login)
+
+  
+    
+
+    
+
+    return render_template("dashboard.html", user=logado, nome_completo = nome_completo)
+
+
+  # CONFIGURAÇÃO PARA GRÁFICOS PAGINA INICIAL
+@app.route("/api/graficos", methods=["GET"])
+def api_graficod():
+    # dados necessários para os gráficos
+    try:
+        conexao = pyodbc.connect(**dados_conexao)
+        cursor = conexao.cursor()
+
+    # CONSULTA PARA O GRAFICO COLABORADOR (total de colaboradores)
+        cursor.execute("SELECT COUNT(*) AS total FROM colaboradores")
+        garfico_colaborador_data = cursor.fetchone()  # Chama a função corretamente para obter os dados
+        garfico_colaborador_values = [garfico_colaborador_data[0]]  # Coloca o total em uma lista
+
+    # CONSULTA PARA O GRAFICO PRODUTOS (contagem de produtos por modelo)
+        cursor.execute("SELECT Produto_modelo, COUNT(*) FROM cadastro_producao_produto GROUP BY Produto_modelo")
+        grafico_produtos_data = cursor.fetchall()
+
+    # Processando os dados para o gráfico de produtos
+        grafico_produtos_labels = [row[0] for row in grafico_produtos_data]
+        grafico_produtos_values = [row[1] for row in grafico_produtos_data]
+        conexao.close()
+
+    # Retornando os dados dos gráficos
+        return jsonify({
+        "grafico_colaborador": {"valores": garfico_colaborador_values},
+        "grafico_produto": {"labels": grafico_produtos_labels, "valores": grafico_produtos_values}
+    })
+
+    except Exception as s:
+        print(f"Erro ao buscar dados para os gráficos: {s}")
+        return jsonify({"error": "Erro ao buscar dados para os gráficos"}), 500
+
+
+
+
+
+
+
+
+
 
 @app.route("/login", methods=["POST"])
 def fazer_login():

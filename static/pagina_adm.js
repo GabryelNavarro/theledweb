@@ -64,3 +64,8 @@ window.addEventListener('load', updateMenuSelection);
 
 // Atualiza a seleção do menu quando o hash mudar
 window.addEventListener('hashchange', updateMenuSelection);
+
+
+
+
+
