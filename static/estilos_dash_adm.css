@@ -347,9 +347,9 @@ i{
 }
 
 .grafico-colaborador{
-    max-width: 300px;
-    max-height: 300px;
-    left: 70%;
+    max-width: 450px;
+    max-height: 450px;
+    left: 60%;
     position: absolute;
     top: 23%;
 }
@@ -366,5 +366,7 @@ i{
 .legenda_grafico_produto{
     position: absolute;
     left: 20%;
-    top: 25%;
+    top: 10%;
+   
 }
+

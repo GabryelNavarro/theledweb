@@ -10,8 +10,8 @@ async function criarGraficos(filtro = '') {
         const filtroLower = filtro.toLowerCase();
 
         const dadosFiltradosColaborador = {
-            labels: ["Total de Colaboradores"], // Como há apenas um valor, não há necessidade de filtrar labels
-            valores: dados.grafico_colaborador.valores // Apenas o total
+            labels: dados.grafico_colaborador.labels.filter(label => label.toLowerCase().includes(filtroLower)),
+            valores: dados.grafico_colaborador.valores.filter((_, index) => dados.grafico_colaborador.labels[index].toLowerCase().includes(filtroLower))
         };
 
         const dadosFiltradosProduto = {
@@ -22,25 +22,113 @@ async function criarGraficos(filtro = '') {
         // Exibe os gráficos com os dados filtrados
         const ctx1 = document.getElementById('grafico-colaborador').getContext('2d');
         new Chart(ctx1, {
-            type: 'doughnut',
+            type: 'bar',
             data: {
                 labels: dadosFiltradosColaborador.labels,
                 datasets: [{
                     data: dadosFiltradosColaborador.valores,
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                    label: 'QUANTIDADE DE COLABORADORES',
+                    backgroundColor: ['#E5BD40', '#EE5E54', '#BC669B', '#4BC0C0', '#5C55A0']
                 }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top', // Coloca a legenda no topo
+                        labels: {
+                            boxWidth: 15, // Ajuste do tamanho da caixa da legenda
+                            padding: 20,   // Espaçamento entre as legendas
+                            font: {
+                                size: 12,   // Ajuste do tamanho da fonte
+                                weight: 'none' // Peso da fonte
+                            }
+                        
+
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'COLABORADORES'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'QUANTIDADE'
+                        }
+                    }
+                }
             }
         });
 
         const ctx2 = document.getElementById('grafico_produto').getContext('2d');
         new Chart(ctx2, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: dadosFiltradosProduto.labels,
                 datasets: [{
                     data: dadosFiltradosProduto.valores,
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0']
+                    label: 'QUANTIDADE DE PRODUTOS',
+                    borderColor: ' rgba(19, 19, 19, 0.781)',
+                    borderWidth: 2,
+                    pointRadius: 7,
+                    pointBackgroundColor: ['#E5BD40','#EE5E54', 'BC669B', '#5C55A0'],
+                    backgroundColor: ['#E5BD40', ' #EE5E54', '#BC669B', '#5C55A0']
                 }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top', // Coloca a legenda no topo
+                        labels: {
+                            boxWidth: 20, // Ajuste do tamanho da caixa da legenda
+                            padding: 10,   // Espaçamento entre as legendas
+                            font: {
+                                size: 12,  // Ajuste do tamanho da fonte
+                                weight: 'none', // Peso da fonte
+                                
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'PODUTO MODELO',
+                            padding: {
+                                bottom: 150
+
+                            },
+                            offset: true
+                            
+                        },
+                        grid:{
+                            color:'#F2F1F1',
+                            lineWidth:1,
+                            borderColor: '#F2F1F1',
+                            borderWidth:5,
+                            tickColor: '#F2F1F1'
+
+
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'QUANTIDADE'
+                        
+                        }
+                    },
+                    
+
+                    
+                }
             }
         });
 

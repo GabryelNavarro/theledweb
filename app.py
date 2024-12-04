@@ -133,31 +133,57 @@ def dashboard():
 @app.route("/api/graficos", methods=["GET"])
 def api_graficod():
     # dados necessários para os gráficos
-    try:
+   try:
         conexao = pyodbc.connect(**dados_conexao)
         cursor = conexao.cursor()
 
-    # CONSULTA PARA O GRAFICO COLABORADOR (total de colaboradores)
+        # CONSULTA PARA O TOTAL DE COLABORADORES
         cursor.execute("SELECT COUNT(*) AS total FROM colaboradores")
-        garfico_colaborador_data = cursor.fetchone()  # Chama a função corretamente para obter os dados
-        garfico_colaborador_values = [garfico_colaborador_data[0]]  # Coloca o total em uma lista
+        grafico_colaborador_data = cursor.fetchone()  # Obtém o total de colaboradores
+        grafico_colaborador_total = grafico_colaborador_data[0]
 
-    # CONSULTA PARA O GRAFICO PRODUTOS (contagem de produtos por modelo)
-        cursor.execute("SELECT Produto_modelo, COUNT(*) FROM cadastro_producao_produto GROUP BY Produto_modelo")
+        # CONSULTA PARA AS FUNÇÕES DISTINTAS DOS COLABORADORES COM CONTAGEM
+        cursor.execute("""
+            SELECT Funcao, COUNT(*) AS quantidade
+            FROM colaboradores
+            GROUP BY Funcao
+        """)
+        grafico_colaborador_funcoes = cursor.fetchall()
+
+        # Processando as funções para o gráfico de colaboradores
+        grafico_colaborador_labels = ['Total de Colaboradores'] + [row[0] for row in grafico_colaborador_funcoes]
+        grafico_colaborador_values = [grafico_colaborador_total] + [row[1] for row in grafico_colaborador_funcoes]
+
+        # CONSULTA PARA O GRÁFICO PRODUTOS (contagem por modelo e soma total)
+        cursor.execute("""
+            SELECT Produto_modelo, SUM(Qtd_produto) AS total_quantidade
+            FROM cadastro_producao_produto
+            GROUP BY Produto_modelo
+        """)
         grafico_produtos_data = cursor.fetchall()
 
-    # Processando os dados para o gráfico de produtos
+        # Processando os dados para o gráfico de produtos
         grafico_produtos_labels = [row[0] for row in grafico_produtos_data]
         grafico_produtos_values = [row[1] for row in grafico_produtos_data]
+
+        # CONSULTA PARA O TOTAL GERAL DE PRODUTOS
+        cursor.execute("SELECT SUM(Qtd_produto) AS total_geral FROM cadastro_producao_produto")
+        total_geral_produtos = cursor.fetchone()[0]
+
         conexao.close()
 
-    # Retornando os dados dos gráficos
+        # Retornando os dados dos gráficos
         return jsonify({
-        "grafico_colaborador": {"valores": garfico_colaborador_values},
-        "grafico_produto": {"labels": grafico_produtos_labels, "valores": grafico_produtos_values}
-    })
-
-    except Exception as s:
+            "grafico_colaborador": {
+                "labels": grafico_colaborador_labels,
+                "valores": grafico_colaborador_values
+            },
+            "grafico_produto": {
+                "labels": grafico_produtos_labels + ["TOTAL DE PRODUTOS"],  # Adiciona o rótulo do total geral
+                "valores": grafico_produtos_values + [total_geral_produtos]  # Adiciona o valor do total geral
+            }
+        })
+   except Exception as s:
         print(f"Erro ao buscar dados para os gráficos: {s}")
         return jsonify({"error": "Erro ao buscar dados para os gráficos"}), 500
 
@@ -191,7 +217,7 @@ def logout():
     resposta = make_response(redirect("/login"))
     resposta.set_cookie("login", "", expires=0)
     resposta.set_cookie("senha", "", expires=0)
-    resposta.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0"
+    resposta.headers["Catche-Control"] = "no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0"
     resposta.headers["Pragma"] = "no-cache"
     resposta.headers["Expires"] = "0"
     return resposta
