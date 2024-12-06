@@ -154,11 +154,14 @@ def api_graficod():
         grafico_colaborador_labels = ['Total de Colaboradores'] + [row[0] for row in grafico_colaborador_funcoes]
         grafico_colaborador_values = [grafico_colaborador_total] + [row[1] for row in grafico_colaborador_funcoes]
 
-        # CONSULTA PARA O GRÁFICO PRODUTOS (contagem por modelo e soma total)
+        # CONSULTA PARA O GRÁFICO PRODUTOS (AGUPADOS POR MÊS)
         cursor.execute("""
-            SELECT Produto_modelo, SUM(Qtd_produto) AS total_quantidade
+           SELECT DATENAME(MONTH, data_inicio) AS mes, 
+            SUM(Qtd_produto) AS total_quantidade
             FROM cadastro_producao_produto
-            GROUP BY Produto_modelo
+            GROUP BY YEAR(data_inicio), MONTH(data_inicio), DATENAME(MONTH, data_inicio)
+            ORDER BY YEAR(data_inicio), MONTH(data_inicio);
+
         """)
         grafico_produtos_data = cursor.fetchall()
 

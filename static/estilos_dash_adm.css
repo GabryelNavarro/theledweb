@@ -339,8 +339,8 @@ i{
 /* GRAFICOS  */
 
 .grafico-produto{
-   max-width: 600px;
-   max-height: 600px;
+   max-width: 450px;
+   max-height: 450px;
    margin-left: 100px;
    position: relative;
   margin-top: 2%;
