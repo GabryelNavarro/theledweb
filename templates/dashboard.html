@@ -10,105 +10,81 @@
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-    
 
     <link rel="shortcut icon" href="/static/img/home_login.ico" type="image/x-icon">
     <title>THE LED - GERAL</title>
 </head>
 <body>
     <header>
-        
+        <!-- Conteúdo do cabeçalho -->
     </header>
-    <div class="botao_menu"><button class="toglle-btn" onclick="mostrardiv()">☰</button></div>
+
+    <div class="botao_menu">
+        <button class="toglle-btn" onclick="mostrardiv()">☰</button>
+    </div>
+
     <div class="menu_lateral" id="menu_lateral">
-          
-   
-   
-    <nav>
-        
-        
+        <nav>
             <ul>
-                
                 <li id="home">
-                    <span><a href="#home"><img src="/static/img/dash_adm/casa.png"alt="" class="img_menulateral"><i class="homemenu">Home </i></a></span>
-                    
+                    <span><a href="#home"><img src="/static/img/dash_adm/casa.png" alt="" class="img_menulateral"><i class="homemenu">Home </i></a></span>
                 </li>
-             
                 <li id="dashboard">
-                    <span><a href="#dashboard"><img src="/static/img/dash_adm/grafico(1).png"alt="" class="img_menulateral"><i class="dashmenu">Dashboard</i></a></span>
+                    <span><a href="#dashboard.html"><img src="/static/img/dash_adm/grafico(1).png" alt="" class="img_menulateral"><i class="dashmenu">Dashboard</i></a></span>
                 </li>
-            
                 <li onclick="submenu('submenu_usuario')">
                     <span><a href="#usuarios"><img src="/static/img/dash_adm/perfil-de-usuario.png" alt="" class="img_menulateral"><i>Colaboradores</i></a></span>
                     <ul id="usuarios_submenu" class="submenu">
-                        <li>
-                            <a href="#cadastro_colaborador">cadastrar colaborador</a>
-                        </li>
-                        <li>
-                            <a href="#visualizarcolaborador">Colaboradres no Sistema</a>
-                        </li>
-
+                        <li><a href="#cadastro_colaborador">Cadastrar colaborador</a></li>
+                        <li><a href="#visualizarcolaborador">Colaboradores no Sistema</a></li>
                     </ul>
-                  
-                    <li onclick="submenu_produtos('submenu_produtos')">
-                        
-                        <span><a href="#produtos"> <img src="/static/img/dash_adm/alta-tecnologia.png" alt="" class="img_menulateral"><i>Produtos</i></a></span>
-                        
-                        <ul class="submenu_produtos" id="sub-produtos">
-                            <li>
-                                <a href="#cadastrar_produto">Cadastrar Produto</a>
-                                <li>
-                                    <a href="#produto_sistema">Produtos no Sistema</a>
-                                </li>
-                            </li>
-                            
-                        </ul>
-                    </li>
+                </li>
+                <li onclick="submenu_produtos('submenu_produtos')">
+                    <span><a href="#produtos"><img src="/static/img/dash_adm/alta-tecnologia.png" alt="" class="img_menulateral"><i>Produtos</i></a></span>
+                    <ul class="submenu_produtos" id="sub-produtos">
+                        <li><a href="#cadastrar_produto">Cadastrar Produto</a></li>
+                        <li><a href="#produto_sistema">Produtos no Sistema</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <span><a href="#configuracao"> <img src="/static/img/dash_adm/configuracao.png" alt="" class="img_menulateral"><i>Configurações</i></a></span>
+                    <span><a href="#configuracao"><img src="/static/img/dash_adm/configuracao.png" alt="" class="img_menulateral"><i>Configurações</i></a></span>
                 </li>
-
-               <li class="logout">
-                <span class=""><a href="/logout"><img src="/static/img/dash_adm/sair.png"  class="img_menulateral" title="Sair"><i>sair</i></a></span></li>
-                
+                <li class="logout">
+                    <span><a href="/logout"><img src="/static/img/dash_adm/sair.png" class="img_menulateral" title="Sair"><i>Sair</i></a></span>
+                </li>
             </ul>
-            <!-- <div class="div_img-logo"><img src="/static/img/dash_adm/fundopreto.jpg" alt="" class="img_logo"></div> -->
-
-          
-        </div>
-        
-    </nav>
+        </nav>
+    </div>
 
     <article>
         <div class="div_boasvindas">
-            <p>bem-vindo(A) ao sistema the led,{{nome_completo}}!</p> 
-            <br><br><br><br>
+            <p>Bem-vindo(a) ao sistema The LED, {{nome_completo}}!</p>
             <div class="div_grafico_produto">
-               
-                 <div class="graficos_container">
+                <div class="graficos_container">
                     <div class="fitro_grafico_modelo">
                         
-                    </div>
-                    <h1 class="legenda_grafico_produto">produtos no sitema the led</h1>
-                    
-                    <canvas id="grafico_produto" class="grafico-produto"></canvas>
-                    
-                    
-                    <canvas id="grafico-colaborador" class="grafico-colaborador" >
-                        
-                    </canvas>
-                   <h1 class="legenda_grafico_colaborador"> colaboradores no sistema the led </h1>
-                 </div>
-            </div>
-           
-            
-        </div>
-      
-    </article>
-    <footer>
+                        <form id="filtro-form">
+                            <label for="filtroProduto">Produto:</label>
+                            <select id="filtroProduto" name="produto">
+                                <option value="">Selecione um produto</option>
+                                
+                            </select>
 
+                           
+                            <button type="submit">Aplicar filtro</button>
+                        </form>
+                    </div>
+                    <h1 class="legenda_grafico_produto">Produtos no sistema The LED</h1>
+                    <canvas id="grafico_produto" class="grafico-produto"></canvas>
+                    <canvas id="grafico-colaborador" class="grafico-colaborador"></canvas>
+                    <h1 class="legenda_grafico_colaborador">Colaboradores no sistema The LED</h1>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <!-- Conteúdo do rodapé -->
     </footer>
-    
 </body>
 </html>

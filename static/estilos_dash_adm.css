@@ -339,16 +339,16 @@ i{
 /* GRAFICOS  */
 
 .grafico-produto{
-   max-width: 450px;
-   max-height: 450px;
+   max-width: 500px;
+   max-height: 500px;
    margin-left: 100px;
    position: relative;
   margin-top: 2%;
 }
 
 .grafico-colaborador{
-    max-width: 450px;
-    max-height: 450px;
+    max-width: 500px;
+    max-height: 500px;
     left: 60%;
     position: absolute;
     top: 23%;

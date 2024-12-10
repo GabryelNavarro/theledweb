@@ -37,7 +37,7 @@ function updateMenuSelection() {
     // Mapeamento de rotas para IDs do menu VINCULADO COM ID DE MENU(LISTA)
     const routeToIdMap = {
       '#home': 'home',             // ROTA,ID LISTA
-      '#dashboard': 'dashboard',        // Rota para Dashboard
+      '#dashboard.html': 'dashboard',        // Rota para Dashboard
       '#usuarios': 'usuarios',    // Rota para Colaboradores
       '#produtos': 'produtos',    // Rota para Produtos
       '#configuracao': 'configuracao' // Rota para Configurações
