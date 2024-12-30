@@ -8,7 +8,8 @@
     <script src="/static/grafico_dash_pg_Inicial.js"></script>
     <script src="/static/pagina_adm.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 
     <link rel="shortcut icon" href="/static/img/home_login.ico" type="image/x-icon">
@@ -24,7 +25,7 @@
     </div>
 
     <div class="menu_lateral" id="menu_lateral">
-        <nav>
+        
             <ul>
                 <li id="home">
                     <span><a href="#home"><img src="/static/img/dash_adm/casa.png" alt="" class="img_menulateral"><i class="homemenu">Home </i></a></span>
@@ -53,10 +54,10 @@
                     <span><a href="/logout"><img src="/static/img/dash_adm/sair.png" class="img_menulateral" title="Sair"><i>Sair</i></a></span>
                 </li>
             </ul>
-        </nav>
+        
     </div>
 
-    <article>
+    
         <div class="div_boasvindas">
             <p>Bem-vindo(a) ao sistema The LED, {{nome_completo}}!</p>
             <div class="div_grafico_produto">
@@ -64,10 +65,10 @@
                     <div class="fitro_grafico_modelo">
                         
                         <form id="filtro-form">
-                            <label for="filtroProduto">Produto:</label>
+                            <label for="filtroProduto">FILTRAR PRODUTOS</label>
                             <select id="filtroProduto" name="produto">
                                 <option value="">Selecione um produto</option>
-                                
+
                             </select>
 
                            
@@ -81,10 +82,12 @@
                 </div>
             </div>
         </div>
-    </article>
-
+   
     <footer>
-        <!-- Conteúdo do rodapé -->
-    </footer>
+       <div class="img-logo">
+           <img src="/static/img/dash_adm/fundopreto.jpg" alt="">
+        </div>
+               </footer>
+       
 </body>
 </html>

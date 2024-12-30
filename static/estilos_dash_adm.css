@@ -11,34 +11,52 @@
     letter-spacing: 3px;
 
 }
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    
+    /* overflow: hidden; */
+
+}
+
+
 body{
-    background-image: linear-gradient(180deg,#4d4b4b,#111111fa);
+    background-image: linear-gradient(180deg,#000000,#000000);
     background-repeat: no-repeat;
     background-attachment: fixed;
-    position: relative;
+    position: fixed;
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
 }
 
 
 
 /* MENU LATERAL EXIBIDO*/
 .menu_lateral{
-    background-image: url('img/dash_adm/fundopreto.jpg');
+    /* background-image: url('img/dash_adm/fundopreto.jpg'); */
+    background-color: rgb(8, 8, 8);
+    
     background-attachment:  scroll;
     background-repeat: no-repeat;
    background-size: 70px 70px;
-    background-color: black;
+  
     background-position: center 550px;
     
-    
+    height: 100vh;
 
 
-    position: fixed;
+    position: flex;
     width: 60px;    
     border-right:2px solid ;
     border-image: linear-gradient(to bottom,#E5BD40, #EE5E54, #BC669B, #5C55A0) 1;
     box-shadow: 6px 6px 6px #414141bd;
     border-radius: 1PX;
-    height: 100%;
+   
     z-index: 10;
     padding-top: 5%;
     padding-left: 0.5%;
@@ -50,6 +68,29 @@ body{
    
 }
 /* -------------------------------------------------------------------------------- */
+
+.img-logo{
+    z-index: 0;
+    display: flex;
+    position: fixed;
+  
+
+    right:8%;
+    top: -3%;
+}
+
+.img-logo img{
+    width: 130px;
+    height: 130px;
+    transition: 0.2s linear;
+
+    
+}
+
+.img-logo img:hover{
+    scale: 1.2
+}
+   
 
 
 /* 
@@ -217,7 +258,7 @@ li:hover i{
 .toglle-btn{
 
 margin-left: 10px;
-position: fixed;
+position: absolute;
 width: 45px;
 height: 45px;
 font-size: 20pt;
@@ -319,11 +360,11 @@ i{
 .div_boasvindas {
     position: relative;
     top: 50px; /* Ajusta a posição vertical */
-    left: 8%;
+    left: 1%;
     
    
-    border: 1px solid black;
-    padding: 10px;
+    
+    padding: 1px;
     z-index: 1;
     width: 87%;
     
@@ -339,33 +380,47 @@ i{
 /* GRAFICOS  */
 
 .grafico-produto{
-   max-width: 500px;
-   max-height: 500px;
-   margin-left: 100px;
+   max-width: 550px;
+   max-height: 550px;
+   margin-left: 2%;
    position: relative;
-  margin-top: 2%;
+  margin-top: 10%;
+  display: flex;
 }
 
 .grafico-colaborador{
-    max-width: 500px;
-    max-height: 500px;
-    left: 60%;
+    max-width: 550px;
+    max-height: 550px;
+    left: 50%;
     position: absolute;
-    top: 23%;
+    top: 21%;
+    
+    display: flex;
 }
 
 /* LEGENDAS GRAFICOS */
 
 .legenda_grafico_colaborador{
-    left: 67%; 
+    left: 55%; 
     position: absolute;
-    bottom: 85%;
+    bottom: 82%;
    
   
 }
 .legenda_grafico_produto{
     position: absolute;
-    left: 20%;
-    top: 10%;
+    left: 9%;
+    top: 15%;
+
+    
+    
    
+}
+
+
+.div_boasvindas form{
+    top: 6%;
+    position: absolute;
+    padding-left: 5%;
+    
 }

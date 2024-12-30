@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 filtroProdutoSelect.innerHTML = '<option value="">Selecione um produto</option>';
                 produtos.forEach(produto => {
                     const option = document.createElement('option');
-                    option.value = produto;
-                    option.textContent = produto;
+                    option.value = produto;  // Usa o nome ou ID do produto como valor
+                    option.textContent = produto;  // O nome do produto será exibido
                     filtroProdutoSelect.appendChild(option);
                 });
             } else {
@@ -36,7 +36,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             const dados = await response.json();
             console.log('Dados recebidos para os gráficos:', dados);
 
-            const filtroLower = filtroProduto.toLowerCase();
+            const filtroLower = filtroProduto.toLowerCase().trim();
+
+            // Verificar se temos dados de produto
+            if (!dados.grafico_produto || !dados.grafico_produto.labels || !dados.grafico_produto.valores) {
+                console.error('Dados de gráfico de produto ausentes');
+                return;
+            }
 
             // Dados do gráfico de colaboradores (não depende do filtro)
             const dadosColaborador = {
@@ -44,7 +50,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 valores: dados.grafico_colaborador.valores
             };
 
-            // Dados do gráfico de produtos, aplicando o filtro
+            // Filtrar e agrupar dados de produto por mês
             const dadosFiltradosProduto = {
                 labels: dados.grafico_produto.labels.filter((label, index) => {
                     const corresponde = filtroProduto ? label.toLowerCase().includes(filtroLower) : true;
@@ -56,8 +62,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                 })
             };
 
-            console.log('Labels filtrados:', dadosFiltradosProduto.labels);
-            console.log('Valores filtrados:', dadosFiltradosProduto.valores);
+            console.log('Labels filtrados (meses):', dadosFiltradosProduto.labels);
+            console.log('Valores filtrados (quantidade de produtos):', dadosFiltradosProduto.valores);
 
             // Caso não existam dados filtrados, exibe uma mensagem
             if (dadosFiltradosProduto.labels.length === 0) {
@@ -83,15 +89,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                         labels: dadosColaborador.labels,
                         datasets: [{
                             data: dadosColaborador.valores,
-                            label: 'QUANTIDADE DE COLABORADORES',
-                            backgroundColor: ['#E5BD40', '#EE5E54', '#BC669B', '#4BC0C0', '#5C55A0']
+                            label: 'Quantidade de Colaboradores',
+                            backgroundColor: ['#E5BD40', '#EE5E54', '#BC669B', '#4BC0C0', '#5C55A0'],
+                            barThickness:25
                         }]
                     },
                     options: {
                         responsive: true,
                         plugins: {
                             legend: {
-                                position: 'top',
+                                position: 'none',
                                 labels: {
                                     boxWidth: 15,
                                     padding: 20,
@@ -101,14 +108,43 @@ document.addEventListener('DOMContentLoaded', async function () {
                             datalabels: {
                                 anchor: 'end',
                                 align: 'end',
-                                formatter: (value) => value,
+                                formatter: function(value){
+                                    return value.toLocaleString('pt-br');
+                                },
                                 font: { size: 12, weight: 'bold' },
-                                color: '#000'
+                                color: '#DFDDDD'
                             }
                         },
                         scales: {
-                            x: { title: { display: true, text: 'COLABORADORES' }},
-                            y: { title: { display: true, text: 'QUANTIDADE' }}
+                            x: { 
+                                title: { display: true, padding:25, text: 'COLABORADORES' },
+                                grid: {
+                                    drawOnChartArea: false, // Remove as linhas principais do gráfico no eixo X
+                                    drawTicks: false, // Remove os ticks no eixo X
+                                    drawOnChartArea: false
+                                },
+
+                                border: {
+                                    display: false
+                                }
+                               
+
+                                
+                            },
+                            
+                            y: { 
+                                title: { display: true, text: 'QUANTIDADE' },
+                                ticks:{display: false},
+                                grid: {
+                                    drawOnChartArea: false, // Remove as linhas principais do gráfico no eixo X
+                                    drawTicks: false, // Remove os ticks no eixo X
+                                    drawOnChartArea: false
+                                },
+
+                                border: {
+                                    display: false
+                                }
+                        }
                         }
                     },
                     plugins: [ChartDataLabels]
@@ -117,38 +153,71 @@ document.addEventListener('DOMContentLoaded', async function () {
                 console.error('Elemento grafico-colaborador não encontrado!');
             }
 
-            // Criar gráfico de produtos
+            // Criar gráfico de produtos (quantidades por mês)
             const ctx2 = document.getElementById('grafico_produto');
             if (ctx2) {
                 window.graficoProduto = new Chart(ctx2.getContext('2d'), {
                     type: 'bar',
                     data: {
-                        labels: dadosFiltradosProduto.labels,
+                        labels: dadosFiltradosProduto.labels,  // Meses
                         datasets: [{
-                            data: dadosFiltradosProduto.valores,
-                            label: 'QUANTIDADE DE PRODUTOS',
-                            backgroundColor: ['#935F9D', '#ED6453', '#E89F46', '#4BC0C0', '#5C55A0']
+                            data: dadosFiltradosProduto.valores,  // Quantidades de produto por mês
+                            label: 'Produtos no Sistemas',
+                            backgroundColor: ['#935F9D', '#ED6453', '#E89F46', '#4BC0C0', '#5C55A0'],
+                            barThickness: 24
                         }]
                     },
                     options: {
                         responsive: true,
                         plugins: {
                             legend: {
-                                position: 'top',
-                                labels: { boxWidth: 15, padding: 20, font: { size: 12, weight: 'none' } }
+                                position: 'none',
+                              
                             },
                             datalabels: {
                                 anchor: 'end',
                                 align: 'end',
-                                formatter: (value) => value,
+                                formatter: function(value){
+                                    return value.toLocaleString('pt-br');
+                                },
                                 font: { size: 12, weight: 'bold' },
-                                color: '#000'
+                                color: '#DFDDDD'
                             }
                         },
                         scales: {
-                            x: { title: { display: true, text: 'PRODUTOS' }},
-                            y: { title: { display: true, text: 'QUANTIDADE' }}
+                            x: 
+                            { 
+                                title: { display: true,padding:25, text: 'PRODUTOS'},
+                                grid: {
+                                    drawOnChartArea: false, // Remove as linhas principais do gráfico no eixo X
+                                    drawTicks: false, // Remove os ticks no eixo X
+                                    drawOnChartArea: false
+                                },
+
+                                border: {
+                                    display: false
+                                }
+                            
+                            },
+                            
+                            y: { 
+                                title: { display: true, text: 'QUANTIDADE' },
+                                grid: {
+                                    drawOnChartArea: false, // Remove as linhas principais do gráfico no eixo X
+                                    drawTicks: false, // Remove os ticks no eixo X
+                                    drawOnChartArea: false
+                                },
+
+                                ticks:{
+                                    display:false
+                                },
+
+                                border: {
+                                    display: false
+                                }
+                            }
                         }
+
                     },
                     plugins: [ChartDataLabels]
                 });
