@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Configurações de conexão com o SQL Server
 dados_conexao = {
     "Driver": "SQL Server",
-    "Server": "10.1.0.112",
+    "Server": "25.38.43.94",  # VPN ATIVA (IP REMOTO DO SERVIDOR OU IP DO SERVIDOR)
     "Database": "Cadastro_projeto",
     "timeout": 60,
     "UID": "admin_cadastro",
@@ -89,6 +89,7 @@ def api_graficos():
             cursor = conexao.cursor()
 
             filtro_mes = request.args.get("mes", "").strip()
+            filtro_produto = request.args.get("produto", "").strip()
 
             # Consulta total de colaboradores
             cursor.execute("SELECT COUNT(*) AS total FROM colaboradores")
@@ -113,6 +114,9 @@ def api_graficos():
             if filtro_mes:
                 query_produtos += " AND DATENAME(MONTH, data_inicio) = ?"
                 params.append(filtro_mes.lower())
+            if filtro_produto:
+                query_produtos += " AND produto_modelo = ?"
+                params.append(filtro_produto)
             query_produtos += """
                 GROUP BY YEAR(data_inicio), MONTH(data_inicio), DATENAME(MONTH, data_inicio)
                 ORDER BY YEAR(data_inicio), MONTH(data_inicio)
@@ -122,8 +126,14 @@ def api_graficos():
             grafico_produtos_labels = [row[0] for row in grafico_produtos_data]
             grafico_produtos_values = [row[1] for row in grafico_produtos_data]
 
-            # Soma total de produtos de todos os meses
-            cursor.execute("SELECT SUM(Qtd_produto) AS total_produtos FROM cadastro_producao_produto")
+            # Soma total de produtos de todos os meses (aplicando o filtro de produto, se houver)
+            query_total_produtos = "SELECT SUM(Qtd_produto) AS total_produtos FROM cadastro_producao_produto WHERE 1=1"
+            if filtro_produto:
+                query_total_produtos += " AND produto_modelo = ?"
+                params_total = [filtro_produto]
+            else:
+                params_total = []
+            cursor.execute(query_total_produtos, params_total)
             total_produtos = cursor.fetchone()[0]
 
             # Adiciona a barra "Total"

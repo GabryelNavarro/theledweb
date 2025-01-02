@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (!response.ok) throw new Error('Erro ao carregar produtos');
 
             const produtos = await response.json();
-            console.log('Produtos recebidos:', produtos);
+            console.log('Produtos recebidos:', produtos);  // Verifique os dados recebidos
 
             const filtroProdutoSelect = document.getElementById('filtroProduto');
             if (filtroProdutoSelect) {
@@ -50,10 +50,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 valores: dados.grafico_colaborador.valores
             };
 
-            // Filtrar e agrupar dados de produto por mês
+            // Filtrar dados de produto por nome ou código do produto 
             const dadosFiltradosProduto = {
                 labels: dados.grafico_produto.labels.filter((label, index) => {
                     const corresponde = filtroProduto ? label.toLowerCase().includes(filtroLower) : true;
+                    console.log(`Filtro: ${filtroLower}, Produto: ${label}, Corresponde: ${corresponde}`);  // Debug
                     return corresponde || filtroProduto === ''; // Mostra tudo se não houver filtro
                 }),
                 valores: dados.grafico_produto.valores.filter((valor, index) => {
@@ -62,12 +63,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                 })
             };
 
-            console.log('Labels filtrados (meses):', dadosFiltradosProduto.labels);
+            console.log('Labels filtrados (produtos):', dadosFiltradosProduto.labels);
             console.log('Valores filtrados (quantidade de produtos):', dadosFiltradosProduto.valores);
 
             // Caso não existam dados filtrados, exibe uma mensagem
             if (dadosFiltradosProduto.labels.length === 0) {
-                console.warn('Nenhum dado encontrado para o filtro aplicado.');
+                alert('Nenhum produto encontrado para o filtro selecionado!');
                 dadosFiltradosProduto.labels = ['Sem dados'];
                 dadosFiltradosProduto.valores = [0];
             }
@@ -91,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             data: dadosColaborador.valores,
                             label: 'Quantidade de Colaboradores',
                             backgroundColor: ['#E5BD40', '#EE5E54', '#BC669B', '#4BC0C0', '#5C55A0'],
-                            barThickness:25
+                            barThickness: 25
                         }]
                     },
                     options: {
@@ -102,13 +103,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 labels: {
                                     boxWidth: 15,
                                     padding: 20,
-                                    font: { size: 12, weight: 'none' }
+                                    font: { size: 12, weight: 'normal' }
                                 }
                             },
                             datalabels: {
                                 anchor: 'end',
                                 align: 'end',
-                                formatter: function(value){
+                                formatter: function (value) {
                                     return value.toLocaleString('pt-br');
                                 },
                                 font: { size: 12, weight: 'bold' },
@@ -116,35 +117,27 @@ document.addEventListener('DOMContentLoaded', async function () {
                             }
                         },
                         scales: {
-                            x: { 
-                                title: { display: true, padding:25, text: 'COLABORADORES' },
+                            x: {
+                                title: { display: true, padding: 25, text: 'COLABORADORES' },
                                 grid: {
-                                    drawOnChartArea: false, // Remove as linhas principais do gráfico no eixo X
-                                    drawTicks: false, // Remove os ticks no eixo X
-                                    drawOnChartArea: false
+                                    drawOnChartArea: false,
+                                    drawTicks: false
                                 },
-
                                 border: {
                                     display: false
                                 }
-                               
-
-                                
                             },
-                            
-                            y: { 
+                            y: {
                                 title: { display: true, text: 'QUANTIDADE' },
-                                ticks:{display: false},
+                                ticks: { display: false },
                                 grid: {
-                                    drawOnChartArea: false, // Remove as linhas principais do gráfico no eixo X
-                                    drawTicks: false, // Remove os ticks no eixo X
-                                    drawOnChartArea: false
+                                    drawOnChartArea: false,
+                                    drawTicks: false
                                 },
-
                                 border: {
                                     display: false
                                 }
-                        }
+                            }
                         }
                     },
                     plugins: [ChartDataLabels]
@@ -159,10 +152,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                 window.graficoProduto = new Chart(ctx2.getContext('2d'), {
                     type: 'bar',
                     data: {
-                        labels: dadosFiltradosProduto.labels,  // Meses
+                        labels: dadosFiltradosProduto.labels,
                         datasets: [{
-                            data: dadosFiltradosProduto.valores,  // Quantidades de produto por mês
-                            label: 'Produtos no Sistemas',
+                            data: dadosFiltradosProduto.valores,
+                            label: 'Produtos no Sistema',
                             backgroundColor: ['#935F9D', '#ED6453', '#E89F46', '#4BC0C0', '#5C55A0'],
                             barThickness: 24
                         }]
@@ -172,12 +165,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                         plugins: {
                             legend: {
                                 position: 'none',
-                              
                             },
                             datalabels: {
                                 anchor: 'end',
                                 align: 'end',
-                                formatter: function(value){
+                                formatter: function (value) {
                                     return value.toLocaleString('pt-br');
                                 },
                                 font: { size: 12, weight: 'bold' },
@@ -185,39 +177,30 @@ document.addEventListener('DOMContentLoaded', async function () {
                             }
                         },
                         scales: {
-                            x: 
-                            { 
-                                title: { display: true,padding:25, text: 'PRODUTOS'},
+                            x: {
+                                title: { display: true, padding: 25, text: 'PRODUTOS' },
                                 grid: {
-                                    drawOnChartArea: false, // Remove as linhas principais do gráfico no eixo X
-                                    drawTicks: false, // Remove os ticks no eixo X
-                                    drawOnChartArea: false
+                                    drawOnChartArea: false,
+                                    drawTicks: false
                                 },
-
                                 border: {
                                     display: false
                                 }
-                            
                             },
-                            
-                            y: { 
+                            y: {
                                 title: { display: true, text: 'QUANTIDADE' },
                                 grid: {
-                                    drawOnChartArea: false, // Remove as linhas principais do gráfico no eixo X
-                                    drawTicks: false, // Remove os ticks no eixo X
-                                    drawOnChartArea: false
+                                    drawOnChartArea: false,
+                                    drawTicks: false
                                 },
-
-                                ticks:{
-                                    display:false
+                                ticks: {
+                                    display: false
                                 },
-
                                 border: {
                                     display: false
                                 }
                             }
                         }
-
                     },
                     plugins: [ChartDataLabels]
                 });
