@@ -64,16 +64,18 @@
                 <div class="graficos_container">
                     <div class="fitro_grafico_modelo">
                         
-                        <form id="filtro-form">
-                            <label for="filtroProduto">FILTRAR PRODUTOS</label>
-                            <select id="filtroProduto" name="produto" class="opcoes-filtros">
+                        <form id="filtro-form"  >
+                            <label for="filtro_produto">FILTRAR PRODUTOS</label>
+                            <select id="filtro_produto" name="produto" class="opcoes-filtros">
                                 <option value="" >Selecione um produto</option>
 
                             </select>
 
-                           
-                            <button type="submit" class="aplicar-filtro">Aplicar filtro</button>
+                            <button type="submit"  class="aplicar-filtro" value="Aplicar filtro" >APLICAR FILTRO</button>
+                            
                         </form>
+
+                       
                     </div>
                     <h1 class="legenda_grafico_produto">Produtos no sistema The LED</h1>
                     <canvas id="grafico_produto" class="grafico-produto"></canvas>

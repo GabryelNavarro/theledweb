@@ -140,6 +140,7 @@ def api_graficos():
             grafico_produtos_labels.append("TOTAL")
             grafico_produtos_values.append(total_produtos)
 
+
             # Consulta para projetos
             cursor.execute("SELECT DISTINCT Projeto FROM cadastro_producao_produto")
             projetos = [row[0] for row in cursor.fetchall()]
@@ -160,7 +161,7 @@ def api_graficos():
         return jsonify({"error": "Erro ao buscar dados para os gráficos"}), 500
 
 @app.route("/api/produto", methods=["GET"])
-def api_produto():
+def get_produtos():
     try:
         with pyodbc.connect(**dados_conexao) as conexao:
             cursor = conexao.cursor()
@@ -170,6 +171,11 @@ def api_produto():
     except Exception as e:
         print(f"Erro ao buscar produtos_modelo: {str(e)}")
         return jsonify({"error": "Erro ao buscar produtos"}), 500
+    
+
+
+
+
 
 @app.route("/logout", methods=["GET"])
 def logout():

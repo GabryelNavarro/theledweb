@@ -1,42 +1,52 @@
+
+
+
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', async function () {
     // Função para carregar os produtos para o filtro
-    async function carregarProdutos(filtroProduto = '') {
+    async function carregarProdutos(filtro_produto = '') {
         try {
-            const response = await fetch(`/api/produto?filtro=${filtroProduto}`);
+            const response = await fetch(`/api/produto`);
             if (!response.ok) throw new Error('Erro ao carregar produtos');
 
             const produtos = await response.json();
             console.log('Produtos recebidos:', produtos);  // Verifique os dados recebidos
 
-            const filtroProdutoSelect = document.getElementById('filtroProduto');
-            if (filtroProdutoSelect) {
-                filtroProdutoSelect.innerHTML = '<option value="">Selecione um produto</option>';
-                produtos.forEach(produto => {
-                    const option = document.createElement('option');
-                    option.value = produto;  // Usa o nome ou ID do produto como valor
-                    option.textContent = produto;  // O nome do produto será exibido
-                    filtroProdutoSelect.appendChild(option);
-                });
-            } else {
-                console.error('Elemento filtroProduto não encontrado!');
-            }
+            const filtroProdutoSelect = document.getElementById('filtro_produto');
+            filtroProdutoSelect.innerHTML = '<option value="">Selecione um produto</option>';
+            produtos.forEach(produto => {
+                const option = document.createElement('option')
+                option.value = produto;
+                option.textContent = produto;
+                filtroProdutoSelect.appendChild(option);
+            });
+            
+           
+           
         } catch (error) {
             console.error('Erro ao carregar produtos:', error);
         }
     }
 
     // Função para criar ou atualizar os gráficos com filtros aplicados
-    async function criarGraficos(filtroProduto = '') {
-        try {
-            console.log(`Buscando dados com: Produto - ${filtroProduto}`);
+    async function criarGraficos() {
+        let filtro_produto = '';
+        let elemento_selector  = document.getElementById('filtro_produto');
+        filtro_produto = elemento_selector.value;
 
-            const response = await fetch(`/api/graficos?produto=${filtroProduto}`);
+        try {
+            
+
+            const response = await fetch(`/api/graficos?produto=${filtro_produto}`);
+            
             if (!response.ok) throw new Error('Erro na resposta da API');
 
             const dados = await response.json();
-            console.log('Dados recebidos para os gráficos:', dados);
-
-            const filtroLower = filtroProduto.toLowerCase().trim();
+            //console.log('Dados recebidos para os gráficos:', dados);
 
             // Verificar se temos dados de produto
             if (!dados.grafico_produto || !dados.grafico_produto.labels || !dados.grafico_produto.valores) {
@@ -50,21 +60,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 valores: dados.grafico_colaborador.valores
             };
 
-            // Filtrar dados de produto por nome ou código do produto 
+            // Filtrar dados de produto por nome ou código do produto (insensível ao caso)
             const dadosFiltradosProduto = {
-                labels: dados.grafico_produto.labels.filter((label, index) => {
-                    const corresponde = filtroProduto ? label.toLowerCase().includes(filtroLower) : true;
-                    console.log(`Filtro: ${filtroLower}, Produto: ${label}, Corresponde: ${corresponde}`);  // Debug
-                    return corresponde || filtroProduto === ''; // Mostra tudo se não houver filtro
-                }),
-                valores: dados.grafico_produto.valores.filter((valor, index) => {
-                    const label = dados.grafico_produto.labels[index];
-                    return filtroProduto ? label.toLowerCase().includes(filtroLower) : true;
-                })
+                labels: dados.grafico_produto.labels,
+                valores: dados.grafico_produto.valores
             };
 
-            console.log('Labels filtrados (produtos):', dadosFiltradosProduto.labels);
-            console.log('Valores filtrados (quantidade de produtos):', dadosFiltradosProduto.valores);
+            //console.log('Labels filtrados (produtos):', dadosFiltradosProduto.labels);
+            //console.log('Valores filtrados (quantidade de produtos):', dadosFiltradosProduto.valores);
 
             // Caso não existam dados filtrados, exibe uma mensagem
             if (dadosFiltradosProduto.labels.length === 0) {
@@ -218,15 +221,21 @@ document.addEventListener('DOMContentLoaded', async function () {
     await criarGraficos();
 
     // Adiciona evento para o filtro
+    
+
     const filtroForm = document.getElementById('filtro-form');
-    if (filtroForm) {
+        if (filtroForm) {
         filtroForm.addEventListener('submit', async function (event) {
             event.preventDefault();
-            const produto = document.getElementById('filtroProduto').value;
+            const produto = document.getElementById('filtro_produto').value;
             console.log(`Produto selecionado: ${produto}`);
             await criarGraficos(produto);
         });
     } else {
         console.error('Elemento filtro-form não encontrado!');
     }
+
+    
+
+
 });
