@@ -139,7 +139,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 },
                                 border: {
                                     display: false
-                                }
+                                },
+                                beginAtZero: true,
+                                suggestedMax: Math.max(...dadosColaborador.valores) * 1.1 
+
                             }
                         }
                     },
@@ -151,6 +154,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             // Criar gráfico de produtos (quantidades por mês)
             const ctx2 = document.getElementById('grafico_produto');
+            
             if (ctx2) {
                 window.graficoProduto = new Chart(ctx2.getContext('2d'), {
                     type: 'bar',
@@ -201,7 +205,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                                 },
                                 border: {
                                     display: false
-                                }
+                                },
+                                beginAtZero: true,
+                                suggestedMax: Math.max(...dadosFiltradosProduto.valores) * 1.1 
+                              
+                                
+                               
                             }
                         }
                     },
@@ -235,7 +244,43 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Elemento filtro-form não encontrado!');
     }
 
+
+    
     
 
 
+
+
+});
+
+// INPUT DATA FIM, PUXAR DATA FIM ATUAL AUTOMATICAMENTE 
+
+function verificarData(event) {
+    const dataInput = document.getElementById('data-fim');
+
+    // Verificar se o input está vazio
+    if (!dataInput.value) {
+        const hoje = new Date();
+        const ano = hoje.getFullYear();
+        const mes = String(hoje.getMonth() + 1).padStart(2, '0'); // Adiciona zero à esquerda
+        const dia = String(hoje.getDate()).padStart(2, '0'); // Adiciona zero à esquerda
+        const dataAtual = `${ano}-${mes}-${dia}`; // Corrigido o template string
+
+        dataInput.value = dataAtual; // Define a data atual
+    }
+
+    console.log(`Data enviada: ${dataInput.value}`); // Corrigido o template string
+    
+}
+document.addEventListener('DOMContentLoaded', verificarData);
+
+
+// FILTRAR AUTOMATICAMENTE
+const filtroProduto = document.getElementById('filtro_produto');
+const filtroForm = document.getElementById('filtro-form');
+
+filtroProduto.addEventListener('change', () => {
+    if (filtroProduto.value) {
+        filtroForm.submit(); // Envia o formulário automaticamente
+    }
 });

@@ -1,6 +1,7 @@
 from flask import Flask, request, make_response, redirect, render_template, jsonify
 import pyodbc
 from functools import wraps
+from datetime import date
 
 app = Flask(__name__)
 
@@ -88,8 +89,24 @@ def api_graficos():
         with pyodbc.connect(**dados_conexao) as conexao:
             cursor = conexao.cursor()
 
+            #data_inicio = request.args.get("data_inicio", "").strip()
+
+            #print("data inicio" + data_inicio)
+
+   #         if data_inicio == '':
+            data_atual = date.today()
+            print(data_atual)
+            ano_atual = data_atual.year
+            print(ano_atual)
+            data_inicio = '01/01/'+str(ano_atual)
+            data_fim = '31/12/3000'
+  #          else:
+  #              data_inicio = request.args.get("data_inicio", "").strip() 
+  #              data_fim = request.args.get("data_fim", "").strip()
+
             filtro_mes = request.args.get("mes", "").strip()
             filtro_produto = request.args.get("produto", "").strip()
+            
 
             # Consulta total de colaboradores
             cursor.execute("SELECT COUNT(*) AS total FROM colaboradores")
@@ -105,12 +122,19 @@ def api_graficos():
             grafico_colaborador_labels = ['TOTAL'] + [row[0] for row in grafico_colaborador_funcoes]
             grafico_colaborador_values = [grafico_colaborador_total] + [row[1] for row in grafico_colaborador_funcoes]
 
+            #Data padrão para loading
+            
+
             # Consulta para gráfico de produtos
             query_produtos = """
                 SELECT DATENAME(MONTH, data_inicio) AS mes, SUM(Qtd_produto) AS total_quantidade
-                FROM cadastro_producao_produto WHERE 1=1
+                FROM cadastro_producao_produto WHERE 1=1 
             """
             params = []
+
+            query_produtos += " AND data_inicio >= '" + data_inicio + "' AND data_inicio <= '" + data_fim + "'"
+            print(query_produtos)
+
             if filtro_mes:
                 query_produtos += " AND DATENAME(MONTH, data_inicio) = ?"
                 params.append(filtro_mes.lower())
@@ -127,7 +151,7 @@ def api_graficos():
             grafico_produtos_values = [row[1] for row in grafico_produtos_data]
 
             # Soma total de produtos de todos os meses (aplicando o filtro de produto, se houver)
-            query_total_produtos = "SELECT SUM(Qtd_produto) AS total_produtos FROM cadastro_producao_produto WHERE 1=1"
+            query_total_produtos = "SELECT SUM(Qtd_produto) AS total_produtos FROM cadastro_producao_produto WHERE YEAR (data_inicio) = YEAR(GETDATE()) "
             if filtro_produto:
                 query_total_produtos += " AND produto_modelo = ?"
                 params_total = [filtro_produto]
@@ -140,6 +164,11 @@ def api_graficos():
             grafico_produtos_labels.append("TOTAL")
             grafico_produtos_values.append(total_produtos)
 
+
+
+            #CONSULTA POR DATA FILTRO
+
+          
 
             # Consulta para projetos
             cursor.execute("SELECT DISTINCT Projeto FROM cadastro_producao_produto")
@@ -165,7 +194,7 @@ def get_produtos():
     try:
         with pyodbc.connect(**dados_conexao) as conexao:
             cursor = conexao.cursor()
-            cursor.execute("SELECT DISTINCT produto_modelo FROM cadastro_producao_produto")
+            cursor.execute("SELECT DISTINCT produto_modelo FROM cadastro_producao_produto WHERE YEAR (data_inicio) = YEAR(GETDATE()) ")
             produtos = [row[0] for row in cursor.fetchall()]
             return jsonify(produtos)
     except Exception as e:

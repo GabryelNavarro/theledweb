@@ -59,19 +59,31 @@
 
     
         <div class="div_boasvindas">
-            <p>Bem-vindo(a) ao sistema The LED, {{nome_completo}}!</p>
+            <p>Bem-vindo(a) ao sistema The LED, <i>{{nome_completo}}!</i></p>
             <div class="div_grafico_produto">
                 <div class="graficos_container">
                     <div class="fitro_grafico_modelo">
                         
                         <form id="filtro-form"  >
-                            <label for="filtro_produto">FILTRAR PRODUTOS</label>
+                            <label for="filtro_produto"><strong>PRODUTOS</strong></label>
+                            
                             <select id="filtro_produto" name="produto" class="opcoes-filtros">
                                 <option value="" >Selecione um produto</option>
-
                             </select>
 
-                            <button type="submit"  class="aplicar-filtro" value="Aplicar filtro" >APLICAR FILTRO</button>
+                            <label for="data-inicio" class="data-i"><strong>DATA INICIO</strong></label>
+                            <input type="date" name="data inicio" id="data-inico" class="data-i">
+                            <br>
+                            <label for="data-fim" class="data-fim"><strong>DATA FIM</strong></label>
+                            <input type="date" name="data fim" id="data-fim" class="data-fim">
+                           
+
+
+                          
+
+                        
+
+                            <button type="submit"  class="aplicar-filtro" value="Aplicar filtro" ><img src="/static/img/dash_adm/lupaa.png" alt="" title="Filtrar" ></button>
                             
                         </form>
 
@@ -84,11 +96,16 @@
                 </div>
             </div>
         </div>
-   
+       
+        <div class="legenda_footer">
+            <p class="texto">INFINITAS POSSIBILDADES</p>
+        </div>
     <footer>
        <div class="img-logo">
            <img src="/static/img/dash_adm/fundopreto.jpg" alt="">
+           
         </div>
+        
                </footer>
        
 </body>
