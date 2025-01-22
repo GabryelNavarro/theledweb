@@ -1,11 +1,4 @@
 
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', async function () {
     // Função para carregar os produtos para o filtro
     async function carregarProdutos(filtro_produto = '') {
@@ -253,10 +246,18 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 });
 
+// FILTRO POR DATA
+
+
+
+
+
+
+
 // INPUT DATA FIM, PUXAR DATA FIM ATUAL AUTOMATICAMENTE 
 
 function verificarData(event) {
-    const dataInput = document.getElementById('data-fim');
+    const dataInput = document.getElementById('data_termino');
 
     // Verificar se o input está vazio
     if (!dataInput.value) {

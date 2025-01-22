@@ -418,6 +418,7 @@ i{
     position: absolute;
     left: 9%;
     top: 18.5%;
+    
 
     
     
@@ -506,6 +507,8 @@ i{
     position: relative;
     left:120Px;
     top: 33px;
+
+
    
 } 
 
@@ -513,8 +516,13 @@ i{
     position: relative;
     left: 600px;
     bottom: 25px;
+   
 
 
+}
+
+.produto_select{
+   
 }
 
 

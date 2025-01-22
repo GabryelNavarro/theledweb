@@ -2,6 +2,7 @@ from flask import Flask, request, make_response, redirect, render_template, json
 import pyodbc
 from functools import wraps
 from datetime import date
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -84,6 +85,78 @@ def dashboard():
     return render_template("dashboard.html", user=True, nome_completo=nome_completo)
 
 @app.route("/api/graficos", methods=["GET"])
+
+# CÓDIGO NOVO FEITO EM : 22/01/2025 (FILTRO POR DATA)
+# def filtro_data():
+#      try:
+#         with pyodbc.connect(**dados_conexao) as conexao:
+#             cursor = conexao.cursor()
+
+#             data_inicio = request.args.get("data_inicio","").strip()
+#             data_fim = request.args.get("data_termino","").strip()
+
+#             if not data_inicio:
+#                 data_inicio = f'01/01/{date.today().year}'
+#             if not data_fim:
+#                 data_fim = f'31/12/{date.today().year}'
+
+#             try: 
+#                 data_inicio = datetime.strptime(data_inicio, "%d/%m/%Y").strftime("%Y-%m-%d")
+#                 data_fim = datetime.strptime(data_fim, "%d/%m/%Y").strftime("%Y-%m-%d")
+#             except ValueError:
+#                 return jsonify({"error": "Formato de data inválido. use DD/MM/YYY."}),400
+#             filtro_mes = request.args.get("mes", "").strip()
+#             filtro_produto = request.args.get("produto", "").strip()
+
+#             query_produtos = """
+#                SELECT produto_modelo, SUM(Qtd_produto) AS total_quantidade
+#                 FROM cadastro_producao_produto
+#                 WHERE CONVERT(DATE, data_inicio) >= ? AND CONVERT(DATE, data_inicio) <= ?
+#             """
+
+#             params = [data_inicio,data_fim]
+
+
+#             if filtro_mes:
+#                 query_produtos += "AND DATENAME(MONTH, data_inicio) = ?"
+#                 params.append(filtro_mes.lower())
+            
+#             if filtro_produto:
+#                 query_produtos += "AND produto_modelo = ?"
+#                 params.append(filtro_produto)
+
+            
+#             query_produtos += """
+#                 GROUP BY produto_modelo
+#                 ORDER BY produto_modelo
+#             """
+#             cursor.execute(query_produtos, params)
+#             grafico_produtos_data = cursor.fetchall()
+
+#             grafico_produtos_labels = [row[0] for row in grafico_produtos_data]
+#             grafico_produtos_values = [row[1] for row in grafico_produtos_data]
+
+#             return jsonify({
+#             "grafico_produto": {
+#                 "labels": grafico_produtos_labels,
+#                 "valores": grafico_produtos_values
+#             }
+#         })
+     
+
+#      except Exception as e:
+#          print(f"Erro ao buscar dados para gráfico: {str(e)}")
+#          return jsonify({"error": "Erro ao buscar dados para os gráficos"}),500
+     
+
+    #  --------------------------------------------------------------------------------------------------------------------------------
+         
+
+  
+    
+
+
+
 def api_graficos():
     try:
         with pyodbc.connect(**dados_conexao) as conexao:
@@ -167,6 +240,7 @@ def api_graficos():
 
 
             #CONSULTA POR DATA FILTRO
+            
 
           
 
